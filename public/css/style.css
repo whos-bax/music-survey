@@ -37,7 +37,7 @@ body {
   color: white !important;
 }
 
-.submit-btn {
+#last-submit {
   display: none;
 }
 #btn-submit {

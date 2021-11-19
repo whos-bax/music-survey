@@ -41,8 +41,11 @@ function backUser() {
 
 function quest1(event) {
   const q1yes = event.target.value;
-  const submitBtn = document.querySelector(".submit-btn");
-  submitBtn.classList.add('.appear')
+  const submitBtn = document.getElementById("last-submit");
+  console.log(submitBtn);
+  console.log(submitBtn.style.display);
+  submitBtn.style.display = "block";
+  submitBtn.classList.add(".appear");
   console.log(submitBtn);
   if (q1yes === "yes") {
     document.getElementById("q2").style.display = "flex";
@@ -132,7 +135,17 @@ function handleClick() {
 }
 
 function handleSubmit(event) {
+  // event.preventDefault();
   alert("고생하셨습니다. 감사합니다😉");
+  const yesOrNo = localStorage.getItem("Q1");
+  
+  const resultKeys = Object.keys(localStorage);
+  const resultValues = Object.values(localStorage);
+  const some = {};
+  for (let i = 0; i < resultKeys.length; i++) {
+    some[resultKeys[i]] = resultValues[i];
+  }
+  console.log(some);
+  localStorage.setItem("result", some);
   localStorage.clear();
-  console.log("submit");
 }
