@@ -1,0 +1,165 @@
+html,
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+.background-img {
+  width: 100%;
+  object-fit: contain;
+  opacity: 0.6;
+  top: -20%;
+  z-index: 1;
+}
+#btn-survey {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 4px;
+  border: solid;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: peachpuff;
+  color: white;
+  cursor: pointer;
+}
+#btn-survey:hover {
+  background-color: sandybrown;
+}
+#btn-survey:hover a {
+  color: white !important;
+}
+
+.submit-btn {
+  display: none;
+}
+#btn-submit {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 4px;
+  border: solid;
+  padding: 10px;
+  background-color: peachpuff;
+  color: sandybrown;
+  cursor: pointer;
+}
+#btn-submit:hover {
+  color: peachpuff;
+  background-color: white;
+}
+#btn-submit:hover span {
+  color: black !important;
+}
+#btn-submit:hover a {
+  color: black !important;
+}
+
+#back-user {
+  font-weight: 200;
+  font-size: small;
+  cursor: pointer;
+}
+#back-user:hover {
+  text-decoration: underline;
+}
+
+.titleName {
+  align-self: center;
+  justify-content: center;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  z-index: 9999;
+}
+.survey-content {
+  margin: 2.5em 2em 2em 2em;
+  background-color: beige;
+  text-align: center;
+}
+.preface {
+  width: 100%;
+  text-align: center;
+  font-weight: 300;
+  position: absolute;
+  top: 10px;
+  font-size: medium;
+  text-decoration: none;
+  color: black;
+}
+.preface:hover {
+  color: white;
+}
+form {
+  padding: 3em;
+}
+fieldset {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 70%;
+  margin: auto auto 3em auto;
+  padding: 3em;
+  background-color: white;
+}
+legend {
+  padding: 0.5em 1em 0.5em 1em;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: peachpuff;
+}
+label {
+  padding: 0.5rem;
+}
+
+#survey {
+  display: none;
+  opacity: 0;
+}
+
+#q2,
+#q3,
+#q4,
+#q5,
+#q6,
+#q7 {
+  display: none;
+}
+
+.appear {
+  animation: fade-in 1s;
+  animation-fill-mode: forwards;
+  display: flex;
+}
+
+.disappear {
+  animation: fade-out 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+
+  }
+  to {
+    opacity: 0;
+  }
+}
