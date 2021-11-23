@@ -18,9 +18,12 @@
 
   <!-- 1 page -->
   <div class="container" style="align-items: center;" id='home'>
-    <div style="position: absolute; height: auto;">
+    <div style="position: absolute; height: auto; width: 100%;">
       <img class="background-img" src="musician.jpg" />
     </div>
+    <span
+      style="text-align: end; position: absolute; right: 2em; top: 1em; font-weight: 300; color: white; text-shadow:1px 1px 5px #000;">2015270029
+      박상호</span>
     <div class='titleName'>
       <span style="margin:auto auto 1em auto; font-size: 45px;
       color:white;text-shadow:1px 1px 8px #000; font-weight: 700;">
@@ -43,9 +46,7 @@
         </a>
       </button>
     </div>
-    <span
-      style="text-align: end;position: absolute; right: 2em; bottom: 3em; font-weight: 300; color: white; text-shadow:1px 1px 5px #000;">2015270029
-      박상호</span>
+
   </div>
 
   <!-- 2 page -->
@@ -67,6 +68,9 @@
           </label>
           <label>
             <input type='radio' name='age' value='40' />40대
+          </label>
+          <label>
+            <input type='radio' name='age' value='50' />50대 이상
           </label>
         </fieldset>
 
@@ -104,35 +108,41 @@
         <fieldset onclick="quest2(event)" id='q2'>
           <legend>2. 하루에 얼마나 들으시나요?</legend>
           <label>
-            <input type='radio' name='question02' value="1hour" required />1시간 이하
+            <input type='radio' name='question02' value="1" required />1시간 이하
           </label>
           <label>
-            <input type='radio' name='question02' value='1-2hour' />1~2시간
+            <input type='radio' name='question02' value='2' />1~2시간
           </label>
           <label>
-            <input type='radio' name='question02' value='2-3hour' />2~3시간
+            <input type='radio' name='question02' value='3' />2~3시간
           </label>
           <label>
-            <input type='radio' name='question02' value='3hour' />3시간 이상
+            <input type='radio' name='question02' value='4' />3시간 이상
           </label>
         </fieldset>
 
         <fieldset onclick="quest3(event)" id='q3'>
-          <legend>3. 어떤 시간에 자주 들으시나요? (최대 2개 선택)</legend>
+          <legend>3. 어떤 시간에 자주 들으시나요? (최대 3개 선택)</legend>
           <label>
             <input type='checkbox' name='question03' value="move" />이동시간
           </label>
           <label>
-            <input type='checkbox' name='question03' value='study' />공부할 때
+            <input type='checkbox' name='question03' value='study' />공부시간
           </label>
           <label>
-            <input type='checkbox' name='question03' value='workout' />운동할 때
+            <input type='checkbox' name='question03' value='workout' />운동시간
           </label>
           <label>
-            <input type='checkbox' name='question03' value='shower' />씻을 때
+            <input type='checkbox' name='question03' value='shower' />샤워시간
           </label>
           <label>
-            <input type='checkbox' name='question03' value='sleep' />잠잘 때
+            <input type='checkbox' name='question03' value='sleep' />수면시간
+          </label>
+          <label>
+            <input type='checkbox' name='question03' value='eating' />식사시간
+          </label>
+          <label>
+            <input type='checkbox' name='question03' value='working' />업무시간
           </label>
         </fieldset>
 
@@ -188,9 +198,9 @@
         </fieldset>
 
         <fieldset onclick="quest7(event)" id='q7'>
-          <legend>7. 아니라면, 다른 취미를 즐기시나요?</legend>
+          <legend>2. 아니라면, 다른 취미를 즐기시나요?</legend>
           <label>
-            <input type='radio' name='question07' value="drawing" />미술
+            <input type='radio' name='question07' value="drawing" required />미술
           </label>
           <label>
             <input type='radio' name='question07' value="game" />게임

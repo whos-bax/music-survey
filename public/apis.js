@@ -81,8 +81,8 @@ function quest3(event) {
       checkList.push(checkbox[i].value);
     }
   }
-  if (checkCount > 2) {
-    alert("2개까지만 선택해주세요!");
+  if (checkCount > 3) {
+    alert("3개까지만 선택해주세요!");
     event.target.checked = false;
     return false;
   }
