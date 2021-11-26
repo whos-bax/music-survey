@@ -10,7 +10,7 @@ const sendData = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name: "호상박", age: 3.5}),
+    body: JSON.stringify({ name: "hong", age: 3.5}),
   });
 
   const data = await response.text();

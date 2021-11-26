@@ -3,7 +3,7 @@ import sqlite from "sqlite3";
 const sqlite3 = sqlite.verbose();
 
 class MyDatabase {
-  constructor(dbName = "mydb.db") {
+  constructor(dbName = "db/mydb.db") {
     this.artistTable = "artists";
     this.db = new sqlite3.Database(dbName, (err) => {
       if (err) {
@@ -25,7 +25,16 @@ class MyDatabase {
   }
 
   insertValue(name) {
-    this.db.run(`INSERT INTO ${this.artistTable} (name) VALUES ('${name}')`);
+    this.db.run(
+      `INSERT INTO ${this.artistTable} (name) VALUES ('${name}')`,
+      (err) => {
+        console.log("error:", err);
+      }
+    );
+  }
+
+  close() {
+    this.db.close();
   }
 }
 

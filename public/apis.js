@@ -1,9 +1,15 @@
 function getAges(event) {
-  localStorage.setItem("Ages", event.target.value);
+  const age = event.target.value;
+  if (age) {
+    localStorage.setItem("Ages", age);
+  }
 }
 
 function getGender(event) {
-  localStorage.setItem("Gender", event.target.value);
+  const gender = event.target.value;
+  if (gender) {
+    localStorage.setItem("Gender", gender);
+  }
 }
 
 function goSurvey() {
@@ -40,14 +46,12 @@ function backUser() {
 }
 
 function quest1(event) {
-  const q1yes = event.target.value;
+  const q1 = event.target.value;
   const submitBtn = document.getElementById("last-submit");
-  console.log(submitBtn);
-  console.log(submitBtn.style.display);
   submitBtn.style.display = "block";
   submitBtn.classList.add(".appear");
-  console.log(submitBtn);
-  if (q1yes === "yes") {
+
+  if (q1 === "yes") {
     document.getElementById("q2").style.display = "flex";
     document.getElementById("q3").style.display = "flex";
     document.getElementById("q4").style.display = "flex";
@@ -63,22 +67,27 @@ function quest1(event) {
 
     document.getElementById("q7").style.display = "flex";
   }
-  localStorage.setItem("Q1", event.target.value);
+  if (q1) {
+    localStorage.setItem("Q1", q1);
+  }
 }
 
 function quest2(event) {
-  localStorage.setItem("Q2", event.target.value);
+  const q2 = event.target.value;
+  if (q2) {
+    localStorage.setItem("Q2", q2);
+  }
 }
 
 function quest3(event) {
   const checkbox = document.getElementsByName(event.target.name);
   let checkCount = 0;
-  const checkList = [];
+  const q3checkList = [];
 
   for (let i = 0; i < checkbox.length; i++) {
     if (checkbox[i].checked) {
       checkCount++;
-      checkList.push(checkbox[i].value);
+      q3checkList.push(checkbox[i].value);
     }
   }
   if (checkCount > 3) {
@@ -86,7 +95,9 @@ function quest3(event) {
     event.target.checked = false;
     return false;
   }
-  localStorage.setItem("Q3", checkList);
+
+  localStorage.setItem("Q3", q3checkList);
+  return q3checkList;
 }
 
 function quest4(event) {
@@ -125,27 +136,33 @@ function quest7(event) {
 
 function handleClick() {
   const yesOrNo = localStorage.getItem("Q1");
-  console.log(yesOrNo);
   if (yesOrNo === "yes") {
     document.getElementsByName("question07")[0].required = false;
+
+    localStorage.removeItem("Q7");
   } else {
     document.getElementsByName("question02")[0].required = false;
     document.getElementsByName("question05")[0].required = false;
+
+    localStorage.removeItem("Q2");
+    localStorage.removeItem("Q3");
+    localStorage.removeItem("Q4");
+    localStorage.removeItem("Q5");
+    localStorage.removeItem("Q6");
   }
 }
 
 function handleSubmit(event) {
-  // event.preventDefault();
+  event.preventDefault();
   alert("고생하셨습니다. 감사합니다😉");
-  const yesOrNo = localStorage.getItem("Q1");
-  
+
   const resultKeys = Object.keys(localStorage);
   const resultValues = Object.values(localStorage);
   const some = {};
   for (let i = 0; i < resultKeys.length; i++) {
     some[resultKeys[i]] = resultValues[i];
   }
-  console.log(some);
   localStorage.setItem("result", some);
   localStorage.clear();
+  console.log(some);
 }

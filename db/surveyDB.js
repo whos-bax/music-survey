@@ -2,8 +2,8 @@ import sqlite from "sqlite3";
 
 const sqlite3 = sqlite.verbose();
 
-class MyDatabase {
-  constructor(dbName = "survey.db") {
+class SurveyDB {
+  constructor(dbName = "db/survey.db") {
     this.surveyTable = "survey";
     this.db = new sqlite3.Database(dbName, (err) => {
       if (err) {
@@ -41,12 +41,16 @@ class MyDatabase {
         "2",
         "move,workout",
         "hiphop,rock",
-        "korea",
+        '${name}',
         "youtube,etc",
         null        
         )`
     );
   }
+
+  close() {
+    this.db.close();
+  }
 }
 
-export { MyDatabase };
+export { SurveyDB };
