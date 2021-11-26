@@ -8,23 +8,18 @@ app.use(express.static("public"));
 app.use(express.json()); // json body 처리
 
 app.get("/hello", (req, res) => {
-  console.log("hello get called");
   res.json({ message: "안녕하세요. Nodemon." });
 });
 
-app.post("/users", (req, res) => {
-  const { name } = req.body;
+app.post("/api", (req, res) => {
+  console.log("survey result : ", req.body);
 
-  console.log(req.body);
+  const surdb = new SurveyDB();
 
-  const myDb = new MyDatabase();
-  const mbd = new SurveyDB();
+  surdb.createTable();
+  surdb.insertValue(req.body);
 
-  mbd.createTable();
-
-  myDb.insertValue(name);
-  myDb.close();
-  res.send("잘받았어");
+  surdb.close()
 });
 
 app.listen(3000, () => console.log("server is running on port 3000"));

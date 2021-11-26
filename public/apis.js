@@ -139,20 +139,21 @@ function handleClick() {
   if (yesOrNo === "yes") {
     document.getElementsByName("question07")[0].required = false;
 
-    localStorage.removeItem("Q7");
+    localStorage.setItem("Q7", null);
   } else {
     document.getElementsByName("question02")[0].required = false;
     document.getElementsByName("question05")[0].required = false;
 
-    localStorage.removeItem("Q2");
-    localStorage.removeItem("Q3");
-    localStorage.removeItem("Q4");
-    localStorage.removeItem("Q5");
-    localStorage.removeItem("Q6");
+    localStorage.setItem("Q2", null);
+    localStorage.setItem("Q3", null);
+    localStorage.setItem("Q4", null);
+    localStorage.setItem("Q5", null);
+    localStorage.setItem("Q6", null);
+
   }
 }
 
-function handleSubmit(event) {
+async function handleSubmit(event) {
   event.preventDefault();
   alert("고생하셨습니다. 감사합니다😉");
 
@@ -164,5 +165,16 @@ function handleSubmit(event) {
   }
   localStorage.setItem("result", some);
   localStorage.clear();
-  console.log(some);
+  
+  const result = await fetch("/api", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(some),
+  });
+
+  const data = await result.text();
+
+  console.log("???", data);
 }

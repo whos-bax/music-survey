@@ -32,18 +32,18 @@ class SurveyDB {
       )`);
   }
 
-  insertValue(name) {
+  insertValue(Object) {
     this.db.run(
       `INSERT INTO ${this.surveyTable} (ages, gender, question1, question2, question3, question4, question5, question6, question7 ) VALUES (
-        "10",
-        "male",
-        "yes",
-        "2",
-        "move,workout",
-        "hiphop,rock",
-        '${name}',
-        "youtube,etc",
-        null        
+        "${Object.Ages}",
+        "${Object.Gender}",
+        "${Object.Q1}",
+        "${Object.Q2}",
+        "${Object.Q3}",
+        "${Object.Q4}",
+        '${Object.Q5}',
+        "${Object.Q6}",
+        '${Object.Q7}'
         )`
     );
   }
