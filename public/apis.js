@@ -166,6 +166,7 @@ async function handleSubmit(event) {
   localStorage.setItem("result", some);
   localStorage.clear();
   
+  // index.js
   const result = await fetch("/api", {
     method: "POST",
     headers: {
@@ -178,3 +179,9 @@ async function handleSubmit(event) {
 
   console.log("???", data);
 }
+
+const fetchData = async () => {
+  const response = await fetch("/api");
+  const data = await response.json();
+  console.log(data);
+};

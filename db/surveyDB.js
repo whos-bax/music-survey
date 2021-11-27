@@ -48,6 +48,12 @@ class SurveyDB {
     );
   }
 
+  getValue() {
+    this.db.run (
+      `SELECT * FROM ${this.surveyTable}`
+    )
+  }
+
   close() {
     this.db.close();
   }
