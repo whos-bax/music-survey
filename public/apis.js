@@ -1,7 +1,9 @@
+const result = {};
+
 function getAges(event) {
   const age = event.target.value;
   if (age) {
-    localStorage.setItem("Ages", age);
+    result["Ages"] = age;
   }
 }
 
@@ -9,21 +11,14 @@ function getGender(event) {
   const gender = event.target.value;
   if (gender) {
     localStorage.setItem("Gender", gender);
+    result["Gender"] = gender;
   }
 }
 
 function goSurvey() {
-  const ageChecked = document.getElementsByName("age");
-  const genderChecked = document.getElementsByName("gender");
-  const ageList = [];
-  const genderList = [];
-  for (let i = 0; i < ageChecked.length; i++) {
-    ageList.push(ageChecked[i].checked);
-  }
-  for (let j = 0; j < genderChecked.length; j++) {
-    genderList.push(genderChecked[j].checked);
-  }
-  if (ageList.includes(true) && genderList.includes(true)) {
+  const ageChecked = result["Ages"];
+  const genderChecked = result["Gender"];
+  if (ageChecked && genderChecked != null) {
     document.getElementById("survey").style.display = "block";
     document.getElementById("survey").style.opacity = 1;
     document.getElementById("survey").classList.add("appear");
@@ -68,14 +63,14 @@ function quest1(event) {
     document.getElementById("q7").style.display = "flex";
   }
   if (q1) {
-    localStorage.setItem("Q1", q1);
+    result["Q1"] = q1;
   }
 }
 
 function quest2(event) {
   const q2 = event.target.value;
   if (q2) {
-    localStorage.setItem("Q2", q2);
+    result["Q2"] = q2;
   }
 }
 
@@ -95,93 +90,83 @@ function quest3(event) {
     event.target.checked = false;
     return false;
   }
-
-  localStorage.setItem("Q3", q3checkList);
-  return q3checkList;
+  result["Q3"] = q3checkList;
 }
 
 function quest4(event) {
   const checkbox = document.getElementsByName(event.target.name);
   let checkCount = 0;
-  const checkList = [];
+  const q4checkList = [];
   for (let i = 0; i < checkbox.length; i++) {
     if (checkbox[i].checked) {
       checkCount++;
-      checkList.push(checkbox[i].value);
+      q4checkList.push(checkbox[i].value);
     }
   }
-  localStorage.setItem("Q4", checkList);
+  result["Q4"] = q4checkList;
 }
 
 function quest5(event) {
-  localStorage.setItem("Q5", event.target.value);
+  const q5 = event.target.value;
+  result["Q5"] = q5;
 }
 
 function quest6(event) {
   const checkbox = document.getElementsByName(event.target.name);
   let checkCount = 0;
-  const checkList = [];
+  const q6checkList = [];
   for (let i = 0; i < checkbox.length; i++) {
     if (checkbox[i].checked) {
       checkCount++;
-      checkList.push(checkbox[i].value);
+      q6checkList.push(checkbox[i].value);
     }
   }
-  localStorage.setItem("Q6", checkList);
+  result["Q6"] = q6checkList;
 }
 
 function quest7(event) {
-  localStorage.setItem("Q7", event.target.value);
+  const q7 = event.target.value;
+  result["Q7"] = q7;
 }
 
 function handleClick() {
-  const yesOrNo = localStorage.getItem("Q1");
+  const yesOrNo = result["Q1"];
   if (yesOrNo === "yes") {
     document.getElementsByName("question07")[0].required = false;
 
-    localStorage.setItem("Q7", null);
+    result["Q7"] = null;
   } else {
     document.getElementsByName("question02")[0].required = false;
     document.getElementsByName("question05")[0].required = false;
 
-    localStorage.setItem("Q2", null);
-    localStorage.setItem("Q3", null);
-    localStorage.setItem("Q4", null);
-    localStorage.setItem("Q5", null);
-    localStorage.setItem("Q6", null);
-
+    result["Q2"] = null;
+    result["Q3"] = null;
+    result["Q4"] = null;
+    result["Q5"] = null;
+    result["Q6"] = null;
   }
+  console.log(result);
 }
 
 async function handleSubmit(event) {
   event.preventDefault();
   alert("고생하셨습니다. 감사합니다😉");
 
-  const resultKeys = Object.keys(localStorage);
-  const resultValues = Object.values(localStorage);
-  const some = {};
-  for (let i = 0; i < resultKeys.length; i++) {
-    some[resultKeys[i]] = resultValues[i];
-  }
-  localStorage.setItem("result", some);
-  localStorage.clear();
-  
   // index.js
-  const result = await fetch("/api", {
+  const some = await fetch("/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(some),
+    body: JSON.stringify(result),
   });
 
-  const data = await result.text();
-
+  const data = await some.text();
   console.log("???", data);
 }
 
 const fetchData = async () => {
   const response = await fetch("/api");
   const data = await response.json();
-  console.log(data);
+  console.log("@#@#", data);
 };
