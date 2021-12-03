@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script src="js/apis.js"></script>
+  <title>설문조사 사이트</title>
+</head>
+
+<body>
+  <script src="js/chart.js"></script>
+  <script>
+    setTimeout(() => {
+      document.getElementById('result-title').style.visibility = 'visible';
+      document.getElementById('result-title').style.height = '100%';
+    }, 500)
+  </script>
+
+  <div class="container" style="align-items: center;" id='home'>
+    <div style="position: absolute; height: auto; width: 100%;">
+      <img class="background-img" src="musician.jpg" />
+    </div>
+    <span
+      style="text-align: end; position: absolute; right: 2em; top: 1em; font-weight: 300; color: white; text-shadow:1px 1px 5px #000;">2015270029
+      박상호</span>
+    <button
+      style="text-align: end; position: absolute; left: 2em; top: 1em; font-weight: 300; border: none; cursor: pointer; color:black; border-radius: 0; z-index: 10;"
+      id="btn-survey" onclick="location.href='./index.html'">
+      <a style="text-decoration: none; color: black; width: 100%;">설문하러가기</a>
+    </button>
+    <div class='titleName' style="align-self: start;" id='result-title'>
+      <span style="margin:1em auto auto auto; font-size: 45px;
+      color:white; text-shadow:1px 1px 8px #000; font-weight: 700;">
+        설문 조사 결과
+      </span>
+      <div class="survey-content" style="height: 100%;">
+        <canvas id="bar-chart" width="800" height="450"></canvas>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
