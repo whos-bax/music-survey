@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import { MyDatabase } from "./db/MyDatabase.js";
 import { SurveyDB } from "./db/surveyDB.js";
 
@@ -11,7 +11,9 @@ const surdb = new SurveyDB();
 
 app.get("/api", (req, res) => {
   surdb.getValue();
-  res.json({ message: "안녕하세요. Nodemon." });
+  res.json({ message: "test" });
+
+  surdb.close();
 });
 
 // apis.js

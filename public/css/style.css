@@ -168,3 +168,9 @@ label {
   height: 0vh;
   transition: all 2.5s;
 }
+
+#myChart {
+  display: flex !important;
+  /* width: 50% !important; */
+  /* height: 50% !important; */
+}

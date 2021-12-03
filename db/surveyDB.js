@@ -49,9 +49,10 @@ class SurveyDB {
   }
 
   getValue() {
-    this.db.run (
-      `SELECT * FROM ${this.surveyTable}`
-    )
+    this.db.serialize(() => {
+      this.db.run(`SELECT * FROM ${this.surveyTable}`);
+      console.log('gege')
+    });
   }
 
   close() {

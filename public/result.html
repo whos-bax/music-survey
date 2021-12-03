@@ -15,7 +15,6 @@
 </head>
 
 <body>
-  <script src="js/chart.js"></script>
   <script>
     setTimeout(() => {
       document.getElementById('result-title').style.visibility = 'visible';
@@ -40,11 +39,17 @@
       color:white; text-shadow:1px 1px 8px #000; font-weight: 700;">
         설문 조사 결과
       </span>
-      <div class="survey-content" style="height: 100%;">
-        <canvas id="bar-chart" width="800" height="450"></canvas>
+
+      <!-- 설문 결과 표기 -->
+      <div class="survey-content" style="height: 100%; overflow-y: scroll">
+        
+        <div style="padding: 1em;">
+          <canvas id="myChart"></canvas>
+        </div>
       </div>
     </div>
   </div>
+  <script src="js/chart.js"></script>
 </body>
 
 </html>
