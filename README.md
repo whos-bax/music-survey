@@ -1,8 +1,7 @@
 # music-survey
 
 음악을 얼마나 좋아하시나요?
-
-``` [설문조사 홈페이지 이동하기](https://whos-bax.github.io/music-survey/public/index.html) ```
+#### [설문조사 홈페이지 이동하기](https://whos-bax.github.io/music-survey/public/index.html)
 
 ### 2021년 3,4분기 (2학기)
 
