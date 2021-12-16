@@ -1,46 +1,79 @@
-const getKeys = async () => {
+const allChart = async () => {
   const response = await fetch("/api", {
     method: "GET",
   });
   const data = await response.json();
-  console.log("test", data);
-};
-getKeys();
+  console.log(data);
 
-const ctx = document.getElementById("myChart").getContext("2d");
-const myChart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
+  // DOM
+  const ages = document.getElementById("chart-ages").getContext("2d");
+  const gender = document.getElementById("chart-gender").getContext("2d");
+
+  // age
+  const ageArr = [];
+  const ageArrCount = [];
+  for (let i = 0; i < data["ages"].length; i++) {
+    ageArr.push(data["ages"][i].ages);
+    ageArrCount.push(data["ages"][i]["COUNT(ages)"]);
+  }
+  const ageChart = new Chart(ages, {
+    type: "pie",
+    data: {
+      labels: ageArr,
+      datasets: [
+        {
+          label: "나이 분포도",
+          data: ageArrCount,
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(54, 162, 235)",
+            "rgb(255, 205, 86)",
+            "rgba(255, 159, 64)",
+          ],
+        },
+      ],
+    },
+    options: {
+      responsive: false,
+      title: {
+        display: true,
+        text: "나이 분포도",
       },
     },
-  },
-});
+  });
+
+  // gender
+  const genderArr = [];
+  const genderCount = [];
+  for (let i = 0; i < data["gender"].length; i++) {
+    genderArr.push(data["gender"][i].gender);
+    genderCount.push(data["gender"][i]["COUNT(gender)"]);
+  }
+  const genderChart = new Chart(gender, {
+    type: "pie",
+    data: {
+      labels: genderArr,
+      datasets: [
+        {
+          label: "성별",
+          data: genderCount,
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(54, 162, 235)",
+            "rgb(255, 205, 86)",
+            "rgba(255, 159, 64)",
+          ],
+        },
+      ],
+    },
+    options: {
+      responsive: false,
+      title: {
+        display: true,
+        text: "성별",
+      },
+    },
+  });
+};
+
+allChart();
