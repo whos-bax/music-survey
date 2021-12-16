@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+  </style>
+  <script>
+    async function isAdmin(event) {
+      console.log(event)
+      event.preventDefault();
+      const response = await fetch("/api/admin", {
+        method: "GET"
+      });
+      const data = await response.json();
+
+      const dbId = data[0].adminId;
+      const dbPw = data[0].password;
+
+      const eId = event.target[0].value;
+      const ePw = event.target[1].value;
+
+      if (dbId === eId && dbPw === ePw) {
+        alert("관리자입니다.")
+        location.href = './newquest.html'
+      }
+      else {
+        alert("권한이 없습니다.")
+      }
+    }
+    function typeChange(e) {
+      const newInput = document.createElement('input');
+      newInput.type = e;
+      console.log(newInput)
+    }
+    function addQuestion(e) {
+      console.log(e)
+      var jbBtn = document.createElement('button');
+      var jbBtnText = document.createTextNode('Click');
+      jbBtn.appendChild(jbBtnText);
+      document.body.appendChild(jbBtn);
+    }
+  </script>
+  <title>설문조사 사이트</title>
+</head>
+
+<body>
+  <div class="container" style="align-items: center;" id='home'>
+
+    <!-- background -->
+    <div style="position: absolute; height: auto; width: 100%;">
+      <img class="background-img" src="musician.jpg" />
+    </div>
+
+    <!-- 설문지 생성 -->
+    <a style="cursor: pointer;" href="./adminCheck.html">
+      <span
+        style="text-align: end; position: absolute; right: 2em; top: 1em; font-weight: 300; color: white; text-shadow:1px 1px 5px #000;">2015270029
+        박상호</span>
+    </a>
+
+    <!-- 설문지로 이동 -->
+    <button
+      style="text-align: end; position: absolute; left: 2em; top: 1em; font-weight: 300; border: none; cursor: pointer; color:black; border-radius: 0; z-index: 10;"
+      id="btn-survey" onclick="location.href='./index.html'">
+      <a style="text-decoration: none; color: black; width: 100%;">설문하러가기</a>
+    </button>
+
+    <!-- 로그인 -->
+    <div class='titleName'>
+      <span style="margin:auto auto 1em auto; font-size: 45px;
+      color:white;text-shadow:1px 1px 8px #000; font-weight: 700;">
+        설문 내용 추가하기
+      </span>
+      <form style="
+            margin: auto auto 1em auto;
+            padding: 1em;
+            font-weight: 300;
+            text-align: center;
+            background-color: whitesmoke;
+          ">
+        <label for='questionId'>문제번호</label>
+        <input type='number' name='questionId'>
+        <br>
+        <label for='title'>질문</label>
+        <input type='password' name='title'>
+        <br>
+        <hr>
+        <select name='typeSelect' onchange="typeChange(this.value)">
+          <option value='radio' selected disabled>타입 선택</option>
+          <option value='radio'>하나만</option>
+          <option value="checkbox">복수선택</option>
+          <option value="text">글자</option>
+        </select>
+        <br>
+        <label for='answer'>선택지</label>
+        <input type='radio' name='answer'>
+        <br>
+        <button type='button' onclick="addQuestion(e)">추가</button>
+        <hr>
+        <input type='submit' />
+      </form>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

@@ -170,6 +170,8 @@ label {
 }
 
 canvas[id^="chart"] {
+  width: 30vw;
+  height: 30vh;
   margin: auto auto 1em auto !important;
   /* display: flex !important; */
 }

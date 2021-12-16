@@ -5,7 +5,6 @@ const sqlite3 = sqlite.verbose();
 class SurveyDB {
   surveyTable = "survey";
   questionTable = "questions";
-  surveyTable = "surveys";
 
   constructor(dbName = "db/survey.db") {
     this.db = new sqlite3.Database(dbName, (err) => {
@@ -20,6 +19,18 @@ class SurveyDB {
       this.createAnswerTable();
     });
   }
+
+  getAdmin = async () => {
+    return new Promise((resolve, reject) => {
+      this.db.all(`SELECT * FROM admin`, (err, row) => {
+        if (err) {
+          console.log("err :", err);
+          return reject(err);
+        }
+        resolve(row);
+      });
+    });
+  };
 
   createTable = () => {
     this.db.run(
@@ -39,7 +50,6 @@ class SurveyDB {
         if (err) {
           console.log("error in creating table", err);
         }
-        console.log("Successful !");
       }
     );
   };
@@ -57,7 +67,6 @@ class SurveyDB {
         if (err) {
           console.log("error in creating table", err);
         }
-        console.log("Successful !");
       }
     );
   };
@@ -75,10 +84,9 @@ class SurveyDB {
         if (err) {
           console.log("error in creating table", err);
         }
-        console.log("Successful !");
       }
     );
-  }
+  };
 
   insertValue(Object) {
     this.db.run(
@@ -153,10 +161,85 @@ class SurveyDB {
     });
   };
 
-  getYes = async () => {
+  getQ2 = async () => {
     return new Promise((resolve, reject) => {
       this.db.all(
-        `SELECT question2, question3, question4, question5, question6 FROM ${this.surveyTable} WHERE question1='yes'`,
+        `SELECT question2, COUNT(question2) FROM ${this.surveyTable} GROUP BY question2`,
+        (err, rows) => {
+          if (err) {
+            console.log("err :", err);
+            return reject(err);
+          }
+          resolve(rows);
+        }
+      );
+    });
+  };
+
+  getQ3 = async () => {
+    return new Promise((resolve, reject) => {
+      this.db.all(
+        `SELECT question3, COUNT(question3) FROM ${this.surveyTable} GROUP BY question3`,
+        (err, rows) => {
+          if (err) {
+            console.log("err :", err);
+            return reject(err);
+          }
+          resolve(rows);
+        }
+      );
+    });
+  };
+
+  getQ4 = async () => {
+    return new Promise((resolve, reject) => {
+      this.db.all(
+        `SELECT question4, COUNT(question4) FROM ${this.surveyTable} GROUP BY question4`,
+        (err, rows) => {
+          if (err) {
+            console.log("err :", err);
+            return reject(err);
+          }
+          resolve(rows);
+        }
+      );
+    });
+  };
+
+  getQ5 = async () => {
+    return new Promise((resolve, reject) => {
+      this.db.all(
+        `SELECT question5, COUNT(question5) FROM ${this.surveyTable} GROUP BY question5`,
+        (err, rows) => {
+          if (err) {
+            console.log("err :", err);
+            return reject(err);
+          }
+          resolve(rows);
+        }
+      );
+    });
+  };
+
+  getQ6 = async () => {
+    return new Promise((resolve, reject) => {
+      this.db.all(
+        `SELECT question6, COUNT(question6) FROM ${this.surveyTable} GROUP BY question6`,
+        (err, rows) => {
+          if (err) {
+            console.log("err :", err);
+            return reject(err);
+          }
+          resolve(rows);
+        }
+      );
+    });
+  };
+
+  getQ7 = async () => {
+    return new Promise((resolve, reject) => {
+      this.db.all(
+        `SELECT question7, COUNT(question7) FROM ${this.surveyTable} GROUP BY question7`,
         (err, rows) => {
           if (err) {
             console.log("err :", err);

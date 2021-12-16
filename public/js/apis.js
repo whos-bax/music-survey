@@ -134,16 +134,16 @@ function handleClick() {
   if (yesOrNo === "yes") {
     document.getElementsByName("question07")[0].required = false;
 
-    result["Q7"] = null;
+    result["Q7"] = '';
   } else {
     document.getElementsByName("question02")[0].required = false;
     document.getElementsByName("question05")[0].required = false;
 
-    result["Q2"] = null;
-    result["Q3"] = null;
-    result["Q4"] = null;
-    result["Q5"] = null;
-    result["Q6"] = null;
+    result["Q2"] = '';
+    result["Q3"] = '';
+    result["Q4"] = '';
+    result["Q5"] = '';
+    result["Q6"] = '';
   }
   console.log(result);
 }

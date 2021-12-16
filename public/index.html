@@ -10,6 +10,18 @@
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
   </style>
   <script src="js/apis.js"></script>
+  <script>
+    function changeOther() {
+      const other = document.getElementById('other');
+      console.log(other);
+      other.value = document.getElementById('inputother').value;
+    }
+    
+    function clickOther() {
+      const other = document.getElementById('other');
+      other.checked = true;
+    }
+  </script>
   <title>설문조사 사이트</title>
 </head>
 
@@ -21,10 +33,12 @@
     <div style="position: absolute; height: auto; width: 100%;">
       <img class="background-img" src="musician.jpg" />
     </div>
-    <!-- 제작자 -->
-    <span
-      style="text-align: end; position: absolute; right: 2em; top: 1em; font-weight: 300; color: white; text-shadow:1px 1px 5px #000;">2015270029
-      박상호</span>
+    <!-- 설문지 생성 -->
+    <a style="cursor: pointer;" href="./adminCheck.html">
+      <span
+        style="text-align: end; position: absolute; right: 2em; top: 1em; font-weight: 300; color: white; text-shadow:1px 1px 5px #000;">2015270029
+        박상호</span></a>
+
     <!-- 설문결과로 이동 -->
     <button
       style="text-align: end; position: absolute; left: 2em; top: 1em; font-weight: 300; border: none; cursor: pointer; border-radius: 0;"
@@ -180,7 +194,7 @@
             <input type='checkbox' name='question04' value='rock' />록/메탈
           </label>
           <label>
-            <input type='checkbox' name='question04' value='rock' />클래식/재즈
+            <input type='checkbox' name='question04' value='jazz' />클래식/재즈
           </label>
         </fieldset>
 
@@ -219,7 +233,7 @@
         <fieldset onclick="quest7(event)" id='q7'>
           <legend>2. 아니라면, 다른 취미를 즐기시나요?</legend>
           <label>
-            <input type='radio' name='question07' value="drawing" required />미술
+            <input type='radio' name='question07' value="drawing" />미술
           </label>
           <label>
             <input type='radio' name='question07' value="game" />게임
@@ -234,7 +248,8 @@
             <input type='radio' name='question07' value="nohobby" />없음
           </label>
           <label>기타 :
-            <input type='text' name='question07' />
+            <input type='radio' name='question07' value='' id='other' />
+            <input type='text' id='inputother' onchange="changeOther()" onclick="clickOther()" />
           </label>
         </fieldset>
 
