@@ -5,6 +5,7 @@ const sqlite3 = sqlite.verbose();
 class SurveyDB {
   surveyTable = "survey";
   questionTable = "questions";
+  surveyTable = "surveys";
 
   constructor(dbName = "db/survey.db") {
     this.db = new sqlite3.Database(dbName, (err) => {
@@ -15,7 +16,8 @@ class SurveyDB {
       console.log(`create ${dbName} successfully.`);
     });
     this.db.serialize(() => {
-      this.createTable();
+      this.createQuestionTable();
+      this.createAnswerTable();
     });
   }
 
@@ -42,12 +44,14 @@ class SurveyDB {
     );
   };
 
+  // question 테이블 생성
   createQuestionTable = () => {
     this.db.run(
       `CREATE TABLE IF NOT EXISTS ${this.questionTable} (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        qNum INTEGER,
-
+        questionId INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        answerId INTEGER,
+        FOREIGN KEY(answerId) REFERENCES ${this.answerTable}(answerId)        
       )`,
       (err) => {
         if (err) {
@@ -58,6 +62,24 @@ class SurveyDB {
     );
   };
 
+  // answer 테이블 생성
+  createAnswerTable = () => {
+    this.db.run(
+      `CREATE TABLE IF NOT EXISTS ${this.questionTable} (
+        answerId INTEGER PRIMARY KEY AUTOINCREMENT,
+        content TEXT,
+        questionId INTEGER,
+        FOREIGN KEY(questionId) REFERENCES ${this.questionTable}(questionId)        
+      )`,
+      (err) => {
+        if (err) {
+          console.log("error in creating table", err);
+        }
+        console.log("Successful !");
+      }
+    );
+  }
+
   insertValue(Object) {
     this.db.run(
       `INSERT INTO ${this.surveyTable} (ages, gender, question1, question2, question3, question4, question5, question6, question7 ) VALUES (
@@ -67,25 +89,22 @@ class SurveyDB {
         "${Object.Q2}",
         "${Object.Q3}",
         "${Object.Q4}",
-        '${Object.Q5}',
+        "${Object.Q5}",
         "${Object.Q6}",
-        '${Object.Q7}'
+        "${Object.Q7}"
         )`
     );
   }
 
   getValue = async () => {
     return new Promise((resolve, reject) => {
-      this.db.all(
-        `SELECT * FROM ${this.surveyTable}`,
-        (err, rows) => {
-          if (err) {
-            console.log("err :", err);
-            return reject(err);
-          }
-          resolve(rows);
+      this.db.all(`SELECT * FROM ${this.surveyTable}`, (err, rows) => {
+        if (err) {
+          console.log("err :", err);
+          return reject(err);
         }
-      );
+        resolve(rows);
+      });
     });
   };
 
@@ -122,7 +141,22 @@ class SurveyDB {
   getQ1 = async () => {
     return new Promise((resolve, reject) => {
       this.db.all(
-        `SELECT question1 FROM ${this.surveyTable}`,
+        `SELECT question1, COUNT(question1) FROM ${this.surveyTable} GROUP BY question1`,
+        (err, rows) => {
+          if (err) {
+            console.log("err :", err);
+            return reject(err);
+          }
+          resolve(rows);
+        }
+      );
+    });
+  };
+
+  getYes = async () => {
+    return new Promise((resolve, reject) => {
+      this.db.all(
+        `SELECT question2, question3, question4, question5, question6 FROM ${this.surveyTable} WHERE question1='yes'`,
         (err, rows) => {
           if (err) {
             console.log("err :", err);

@@ -169,8 +169,7 @@ label {
   transition: all 2.5s;
 }
 
-#myChart {
-  display: flex !important;
-  /* width: 50% !important; */
-  /* height: 50% !important; */
+canvas[id^="chart"] {
+  margin: auto auto 1em auto !important;
+  /* display: flex !important; */
 }

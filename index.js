@@ -14,14 +14,20 @@ app.get("/api", async (req, res) => {
   const getAges = await surdb.getAges();
   const getGender = await surdb.getGender();
   const getQ1 = await surdb.getQ1();
-  res.json({ ages: getAges, gender: getGender, Q1: getQ1, all: value });
+  const getYes = await surdb.getYes();
+  res.json({
+    ages: getAges,
+    gender: getGender,
+    Q1: getQ1,
+    yesAnswer: getYes,
+    all: value,
+  });
 });
 
 // apis.js
 app.post("/api", (req, res) => {
-  console.log("survey result : ", req.body);
-
-  surdb.createTable();
+  surdb.createQuestionTable();
+  surdb.createAnswerTable();
   surdb.insertValue(req.body);
 });
 
